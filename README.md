@@ -61,3 +61,16 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
 
 ## How to use
+1. Semua proses diasumsikan menggunakan Xampp dengan versi PHP minimal 7.4 | apabila menggunakan laragon atau tools lain, silahakan proses sesuai alur tools tersebut
+2. Hidupkan Xampp, nyalakan Apache & MySql
+3. Buka folder htdocs milik Xampp
+4. Lakukan perintah: git clone https://github.com/aritama1412/library_management.git
+5. Setelah selesai melakukan clone, buka phpmyadmin pada browser dan buat database baru dengan nama: library_management
+6. Kembali ke folder project, lalu import database kedalam db yang baru saja dibuat, file db ada didalam projek dengan nama: library_management.sql
+7. Didalam folder prokect, copy paste file: .env.example, dan rubah menjadi nama: .env
+8. Edit isi file .env, cari "DB_DATABASE=laravel" dan rubah menjadi "DB_DATABASE=library_management"
+9. Didalam folder project, buka cmd dan jalankan perintah: composer install
+10. Setelah proses selesai, jalankan perintah: php artisan key:generate
+11. Lalu untuk menjalankan projeck, jalankan perintah: php artisan serve
+12. Buka: http://127.0.0.1:8000 pada browser, lalu login menggunakan user: admin | password: 123123123
+13. Atau bisa juga dengan cara membuat user baru pada link "register"
