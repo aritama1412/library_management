@@ -36,8 +36,8 @@
                     <tbody>
                         @foreach($shelves as $shelf)
                             <tr>
+                                <td>{{ $shelf->id }}</td>
                                 <td>{{ $shelf->name }}</td>
-                                <td>{{ $shelf->about }}</td>
                                 <td>
                                     <a href="{{ route('shelves.edit', $shelf->id) }}" class="btn btn-sm btn-primary btn-responsive float-left">
                                         <i class="fa fa-pencil-alt mr-1" aria-hidden="true"> </i> Edit
