@@ -67,7 +67,7 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 4. Lakukan perintah: git clone https://github.com/aritama1412/library_management.git
 5. Setelah selesai melakukan clone, buka phpmyadmin pada browser dan buat database baru dengan nama: library_management
 6. Kembali ke folder project, lalu import database kedalam db yang baru saja dibuat, file db ada didalam projek dengan nama: library_management.sql
-7. Didalam folder prokect, copy paste file: .env.example, dan rubah menjadi nama: .env
+7. Didalam folder project, copy paste file: .env.example, dan rubah menjadi nama: .env
 8. Edit isi file .env, cari "DB_DATABASE=laravel" dan rubah menjadi "DB_DATABASE=library_management"
 9. Didalam folder project, buka cmd dan jalankan perintah: composer install
 10. Setelah proses selesai, jalankan perintah: php artisan key:generate
