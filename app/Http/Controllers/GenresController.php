@@ -51,6 +51,12 @@ class GenresController extends Controller
             DB::beginTransaction(); 
             $data = $request->collect();
 
+            $check = Genres::where('genre', $data['genre'])->first();
+            if($check){
+                DB::rollBack();
+                return redirect()->route('genres.create')->with(["status" => "Error", "msg" => "Genre already exist!"]);
+            }
+
             $genre = new Genres();
             $genre->genre = $data['genre'];
             if($genre->save()){
@@ -59,7 +65,7 @@ class GenresController extends Controller
             return redirect()->route('genres.index')->with('status','Genre created!');
         } catch (ValidationException $e) {
             DB::rollBack();
-            return redirect()->back()->withErrors($e->errors())->withInput();
+            return redirect()->back()->with(["status" => "Error", "msg" => "Something went wrong."])->withInput();
         }
     }
 
@@ -109,6 +115,12 @@ class GenresController extends Controller
 
             DB::beginTransaction(); 
             $data = $request->collect();
+
+            $check = Genres::where('genre', $data['genre'])->first();
+            if($check){
+                DB::rollBack();
+                return redirect()->route('genres.create')->with(["status" => "Error", "msg" => "Genre already exist!"])->withInput();
+            }
 
             $genre = Genres::findOrFail($id);
             $genre->genre = $data['genre'];

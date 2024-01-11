@@ -204,6 +204,7 @@ class BooksController extends Controller
         try {
             $book = Books::findOrFail($id);
             $book->delete();
+            BooksGenres::where('books_id', $id)->delete(); // remove all existing genre
             
             return redirect()->route('books.index')->with(["status" => "Success", "msg" => "Book deleted!"]);
 
