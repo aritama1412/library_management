@@ -124,7 +124,7 @@
                 </div>
                 <div class="modal-body">
                     <form id='form_add_detail'>
-                        <input type="hidden" name="key" id="key" > 
+                        <input type="hidden" name="key" id="key" value="{{ isset($books_genres)? count($books_genres)-1 : 0 }}"> 
                         <div class="row">
                             <div class="form-group col-lg-12 col-md-12 col-sm-12">
                                 <label for="">Genre</label>
@@ -163,7 +163,6 @@
 
             $(document).on('click', '#addData', function(event){
                 clear();
-
                 $('#modal_detail').modal('show');
             });
 
