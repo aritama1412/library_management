@@ -119,11 +119,11 @@ class AuthorsController extends Controller
             DB::beginTransaction(); 
             $data = $request->collect();
 
-            $check = Authors::where('name', $data['name'])->first();
-            if($check){
-                DB::rollBack();
-                return redirect()->route('authors.create')->with(["status" => "Error", "msg" => "Author already exist!"])->withInput();
-            }
+            // $check = Authors::where('name', $data['name'])->first();
+            // if($check){
+            //     DB::rollBack();
+            //     return redirect()->route('authors.create')->with(["status" => "Error", "msg" => "Author already exist!"])->withInput();
+            // }
 
             $author = Authors::findOrFail($id);
             $author->name = $data['name'];

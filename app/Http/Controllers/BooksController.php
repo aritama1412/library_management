@@ -74,6 +74,12 @@ class BooksController extends Controller
             DB::beginTransaction(); 
             $data = $request->collect();
 
+            $check = Books::where('title', $data['title'])->first();
+            if($check){
+                DB::rollBack();
+                return redirect()->route('books.create')->with(["status" => "Error", "msg" => "Books already exist!"])->withInput();
+            }
+
             $book = new Books();
             $book->author_id = $data['author_id'];
             $book->title = $data['title'];
