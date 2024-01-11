@@ -167,6 +167,7 @@ class BooksController extends Controller
             $book = Books::findOrFail($id);
             $book->author_id = $data['author_id'];
             $book->title = $data['title'];
+            $book->note = $data['note'];
             $book->description = $data['description'];
             $book->shelves_id = $data['shelves_id'];
             $book->release_date = date("Y-m-d", strtotime($data['release_date']));

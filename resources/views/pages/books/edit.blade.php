@@ -53,8 +53,8 @@
     
                         <div class="col-6">
                             <div class="form-group">
-                                <label for="node">Note</label>
-                                <textarea class="form-control" name="node" id="node" cols="30" rows="1">{{ $books->note }}</textarea>
+                                <label for="note">Note</label>
+                                <textarea class="form-control" name="note" id="note" cols="30" rows="1">{{ $books->note }}</textarea>
                             </div>
                         </div>
     
@@ -97,7 +97,10 @@
                                 @isset($books_genres)
                                     @foreach ($books_genres as $key => $genre)
                                         <tr id="{{ $key }}">
-                                            <td id="text_jumlah_{{ $key }}">{{ $genre->getGenre->genre }}</td>
+                                            <td id="text_jumlah_{{ $key }}">
+                                                {{ $genre->getGenre->genre }}
+                                                <input type="hidden" name="data[{{ $key }}][genres_id]" value="{{ $genre->getGenre->id }}" />
+                                            </td>
                                             <td>
                                                 <button type="button" class="delete btn btn-danger" value="{{ $genre->id }}"><i class="fa fa-trash-alt"></i></button>
                                             </td>
