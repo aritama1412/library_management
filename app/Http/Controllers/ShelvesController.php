@@ -52,6 +52,12 @@ class ShelvesController extends Controller
             DB::beginTransaction(); 
             $data = $request->collect();
 
+            $check = Shelves::where('name', $data['name'])->first();
+            if($check){
+                DB::rollBack();
+                return redirect()->route('shelves.create')->with(["status" => "Error", "msg" => "Shelf already exist!"])->withInput();
+            }
+
             $shelf = new Shelves();
             $shelf->name = $data['name'];
             if($shelf->save()){
@@ -62,8 +68,9 @@ class ShelvesController extends Controller
 
         } catch (ValidationException $e) {
             DB::rollBack();
-            return redirect()->back()->withErrors($e->errors())->withInput();
+            return redirect()->back()->with(["status" => "Error", "msg" => "Something went wrong."])->withInput();
         }
+        
     }
 
     /**
@@ -113,6 +120,12 @@ class ShelvesController extends Controller
             DB::beginTransaction(); 
             $data = $request->collect();
 
+            $check = Shelves::where('name', $data['name'])->first();
+            if($check){
+                DB::rollBack();
+                return redirect()->route('shelves.create')->with(["status" => "Error", "msg" => "Shelf already exist!"])->withInput();
+            }
+
             $shelves = Shelves::findOrFail($id);
             $shelves->name = $data['name'];
             if($shelves->save()){
@@ -123,7 +136,7 @@ class ShelvesController extends Controller
 
         } catch (ValidationException $e) {
             DB::rollBack();
-            return redirect()->back()->withErrors($e->errors())->withInput();
+            return redirect()->back()->with(["status" => "Error", "msg" => "Something went wrong."])->withInput();
         }
     }
 
@@ -143,7 +156,7 @@ class ShelvesController extends Controller
 
         } catch (ValidationException $e) {
             DB::rollBack();
-            return redirect()->back()->withErrors($e->errors())->withInput();
+            return redirect()->back()->with(["status" => "Error", "msg" => "Something went wrong."])->withInput();
         }
     }
 }

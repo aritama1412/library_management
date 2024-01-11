@@ -97,7 +97,7 @@ class BooksController extends Controller
 
         } catch (ValidationException $e) {
             DB::rollBack();
-            return redirect()->back()->withErrors($e->errors())->withInput();
+            return redirect()->back()->with(["status" => "Error", "msg" => "Something went wrong."])->withInput();
         }
     }
 
@@ -189,7 +189,7 @@ class BooksController extends Controller
 
         } catch (ValidationException $e) {
             DB::rollBack();
-            return redirect()->back()->withErrors($e->errors())->withInput();
+            return redirect()->back()->with(["status" => "Error", "msg" => "Something went wrong."])->withInput();
         }
     }
 
@@ -210,7 +210,7 @@ class BooksController extends Controller
 
         } catch (ValidationException $e) {
             DB::rollBack();
-            return redirect()->back()->withErrors($e->errors())->withInput();
+            return redirect()->back()->with(["status" => "Error", "msg" => "Something went wrong."])->withInput();
         }
     }
 }

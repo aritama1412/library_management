@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Authors;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
 use PharIo\Manifest\Author;
@@ -52,6 +53,12 @@ class AuthorsController extends Controller
             DB::beginTransaction(); 
             $data = $request->collect();
 
+            $check = Authors::where('name', $data['name'])->first();
+            if($check){
+                DB::rollBack();
+                return redirect()->route('authors.create')->with(["status" => "Error", "msg" => "Author already exist!"])->withInput();
+            }
+
             $newAuthor = new Authors();
             $newAuthor->name = $data['name'];
             $newAuthor->about = $data['about'];
@@ -61,7 +68,7 @@ class AuthorsController extends Controller
             return redirect()->route('authors.index')->with('status','Author created!');
         } catch (ValidationException $e) {
             DB::rollBack();
-            return redirect()->back()->withErrors($e->errors())->withInput();
+            return redirect()->back()->with(["status" => "Error", "msg" => "Something went wrong."])->withInput();
         }
     }
 
@@ -112,6 +119,12 @@ class AuthorsController extends Controller
             DB::beginTransaction(); 
             $data = $request->collect();
 
+            $check = Authors::where('name', $data['name'])->first();
+            if($check){
+                DB::rollBack();
+                return redirect()->route('authors.create')->with(["status" => "Error", "msg" => "Author already exist!"])->withInput();
+            }
+
             $author = Authors::findOrFail($id);
             $author->name = $data['name'];
             $author->about = $data['about'];
@@ -123,7 +136,7 @@ class AuthorsController extends Controller
 
         } catch (ValidationException $e) {
             DB::rollBack();
-            return redirect()->back()->withErrors($e->errors())->withInput();
+            return redirect()->back()->with(["status" => "Error", "msg" => "Something went wrong."])->withInput();
         }
     }
 
@@ -143,7 +156,7 @@ class AuthorsController extends Controller
 
         } catch (ValidationException $e) {
             DB::rollBack();
-            return redirect()->back()->withErrors($e->errors())->withInput();
+            return redirect()->back()->with(["status" => "Error", "msg" => "Something went wrong."])->withInput();
         }
     }
 }
